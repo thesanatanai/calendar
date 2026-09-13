@@ -223,7 +223,7 @@ npm run lint
 
 ## Scripts
 
-This project includes the standard Next.js scripts:
+This project includes the standard Next.js and tauri scripts:
 
 ```json
 {
@@ -231,7 +231,8 @@ This project includes the standard Next.js scripts:
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "tauri": "tauri"
   }
 }
 ```
@@ -278,7 +279,7 @@ A good contribution usually includes:
 
 ## License
 
-This project does not currently declare a license in the repository metadata, so check the project’s intended distribution terms before reuse or publication.
+This project is Licensed under MIT License.
 
 ## Summary
 
