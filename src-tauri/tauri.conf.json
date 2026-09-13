@@ -1,0 +1,70 @@
+{
+  "productName": "Sanatan Calendar",
+  "version": "0.1.0",
+  "identifier": "com.sanatanai.calendar",
+
+  "build": {
+    "frontendDist": "../out"
+  },
+
+  "app": {
+    "withGlobalTauri": true,
+
+    "windows": [
+      {
+        "title": "Sanatan Calendar",
+        "minWidth": 400,
+        "minHeight": 800
+      }
+    ],
+
+    "security": {
+      "csp": null
+    }
+  },
+
+  "bundle": {
+    "active": true,
+
+    "targets": [
+      "nsis",
+      "msi",
+      "appimage",
+      "deb",
+      "rpm",
+      "dmg",
+      "app"
+    ],
+
+    "category": "Education",
+
+    "icon": [
+      "icons/32x32.png",
+      "icons/64x64.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.png",
+      "icons/icon.ico",
+      "icons/icon.icns"
+    ],
+
+    "windows": {
+      "allowDowngrades": false,
+
+      "webviewInstallMode": {
+        "silent": true,
+        "type": "downloadBootstrapper"
+      },
+
+      "nsis": {
+        "installerIcon": "icons/icon.ico",
+        "sidebarImage": "./icons/main.bmp"
+      },
+
+      "wix": {
+        "bannerPath": "./icons/main.bmp",
+        "dialogImagePath": "./icons/main.bmp"
+      }
+    }
+  }
+}

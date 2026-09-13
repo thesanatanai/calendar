@@ -1,0 +1,111 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+  /* -- Flippable content tokens -------------------------------------
+     These read from CSS custom properties (below) so a single class
+     toggle on <html> swaps the whole reading surface between the two
+     themes without touching any component markup. */
+  --color-parchment: var(--parchment);
+  --color-parchment-soft: var(--parchment-soft);
+  --color-ink: var(--ink);
+  --color-line: var(--line);
+
+  /* -- Static palette --------------------------------------------
+     Night and moonlight are the "cover" and "moon" colours -- they
+     stay fixed in both themes, the way ink on a manuscript's binding
+     doesn't change with the hour you're reading it. Marigold, sindoor
+     and peacock are the ritual accents, likewise constant. */
+  --color-night: #151515;
+  --color-night-soft: #200800;
+  --color-moonlight: #f6ecd8;
+  --color-marigold: #e29a2e;
+  --color-marigold-soft: #f2c877;
+  --color-sindoor: #c1432a;
+  --color-peacock: #1d6f64;
+
+  --font-display: "Fraunces Variable", Georgia, serif;
+  --font-body: "Manrope Variable", system-ui, sans-serif;
+}
+
+:root {
+  --parchment: #fbf3e7;
+  --parchment-soft: #f3e8d6;
+  --ink: #3d2d1b;
+  --line: #d9c9ab;
+  color-scheme: light;
+}
+
+.dark {
+  --parchment: #29180c;
+  --parchment-soft: #382812;
+  --ink: #f1e8d6;
+  --line: rgba(241, 232, 214, 0.2);
+  color-scheme: dark;
+}
+
+body {
+  background: var(--color-parchment);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  transition:
+    background-color 0.35s ease,
+    color 0.35s ease;
+}
+
+::selection {
+  background: var(--color-marigold-soft);
+  color: var(--color-night);
+}
+
+/* Visible keyboard focus everywhere, styled instead of suppressed. */
+:focus-visible {
+  outline: 2px solid var(--color-sindoor);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* -- Motion --------------------------------------------------------
+   One orchestrated entrance for the tithi hero on load; everything
+   else animates only in response to something the reader does
+   (hover, toggling the theme, navigating). */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-soft {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 1.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
